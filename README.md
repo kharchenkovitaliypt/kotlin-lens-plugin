@@ -1,5 +1,5 @@
-### Publish gradle and kotlin compiler plugins to maven local repo
+#### Init publish to the maven local repo
 ./gradlew --console=plain :compiler-plugin:publishToMavenLocal :gradle-plugin:publishToMavenLocal
 
-### For debug
+#### For debug
 ./gradlew --rerun-tasks --console=plain --info :compiler-plugin:publishToMavenLocal :example:assemble | grep "TAG"
