@@ -17,12 +17,12 @@ class LensClassGenerationInterceptor(
             bindingContext: BindingContext,
             diagnostics: DiagnosticSink
     ): ClassBuilderFactory =
-    object: ClassBuilderFactory by interceptedFactory {
-        override fun newClassBuilder(origin: JvmDeclarationOrigin) =
-                LensClassBuilder(
-                        messageCollector = messageCollector,
-                        delegateBuilder = interceptedFactory.newClassBuilder(origin),
-                        annotations = annotations
-                )
-    }
+        object: ClassBuilderFactory by interceptedFactory {
+            override fun newClassBuilder(origin: JvmDeclarationOrigin) =
+                    LensClassBuilder(
+                            messageCollector = messageCollector,
+                            delegateBuilder = interceptedFactory.newClassBuilder(origin),
+                            annotations = annotations
+                    )
+        }
 }

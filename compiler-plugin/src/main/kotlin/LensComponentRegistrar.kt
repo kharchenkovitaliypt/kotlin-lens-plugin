@@ -1,6 +1,8 @@
 package com.vitaliykharchenko.kotlin.lens
 
 import com.google.auto.service.AutoService
+import org.jetbrains.kotlin.backend.common.BackendContext
+import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
@@ -8,6 +10,8 @@ import org.jetbrains.kotlin.codegen.extensions.ClassBuilderInterceptorExtension
 import org.jetbrains.kotlin.com.intellij.mock.MockProject
 import org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar
 import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.ir.declarations.IrFile
+import org.jetbrains.kotlin.resolve.BindingContext
 
 @AutoService(ComponentRegistrar::class)
 class LensComponentRegistrar : ComponentRegistrar {
@@ -23,6 +27,13 @@ class LensComponentRegistrar : ComponentRegistrar {
 
         ClassBuilderInterceptorExtension.registerExtension(
                 project, LensClassGenerationInterceptor(configuration.messageCollector, annotations))
+
+        IrGenerationExtension.registerExtension(project, object : IrGenerationExtension {
+            override fun generate(file: IrFile, backendContext: BackendContext, bindingContext: BindingContext) {
+                val text = file.declarations.joinToString { it.descriptor.name.identifier }
+                configuration.messageCollector.report("irFile: ${text}")
+            }
+        })
     }
 }
 
