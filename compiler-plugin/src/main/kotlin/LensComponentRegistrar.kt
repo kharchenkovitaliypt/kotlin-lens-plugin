@@ -25,13 +25,12 @@ class LensComponentRegistrar : ComponentRegistrar {
         val annotations = configuration[KEY_ANNOTATIONS]
                 ?: error("lens plugin requires at least one annotation class option passed to it")
 
-        ClassBuilderInterceptorExtension.registerExtension(
-                project, LensClassGenerationInterceptor(configuration.messageCollector, annotations))
+//        ClassBuilderInterceptorExtension.registerExtension(
+//                project, LensClassGenerationInterceptor(configuration.messageCollector, annotations))
 
         IrGenerationExtension.registerExtension(project, object : IrGenerationExtension {
             override fun generate(file: IrFile, backendContext: BackendContext, bindingContext: BindingContext) {
-                val text = file.declarations.joinToString { it.descriptor.name.identifier }
-                configuration.messageCollector.report("irFile: ${text}")
+                generateIr(file, backendContext, bindingContext, configuration)
             }
         })
     }

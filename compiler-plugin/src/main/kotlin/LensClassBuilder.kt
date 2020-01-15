@@ -40,7 +40,7 @@ class LensClassBuilder(
             override fun visitCode() {
                 super.visitCode()
                 InstructionAdapter(this).apply {
-                    messageCollector.report("begin() name: $name, desc: $desc, signature: ${signature}, exceptions: $exceptions")
+                    messageCollector.report("->$name, desc: $desc")
 
                     getstatic("j/l/System",  "out", "Ljava/io/PrintStream;")
                     anew(Type.getObjectType("j/l/StringBuilder"))
@@ -63,7 +63,7 @@ class LensClassBuilder(
                 when (opcode) {
                     Opcodes.RETURN /* void */, Opcodes.ARETURN /* object */, Opcodes.IRETURN /* int */ -> {
                         InstructionAdapter(this).apply {
-                            messageCollector.report("end() name: $name, opcode: $opcode")
+//                            messageCollector.report("<-$name")
                         }
                     }
                 }

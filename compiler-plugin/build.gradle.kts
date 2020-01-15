@@ -1,7 +1,15 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
+
 plugins {
     kotlin("jvm")
     kotlin("kapt")
     id("maven-publish")
+}
+
+tasks.withType<KotlinJvmCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 publishing {

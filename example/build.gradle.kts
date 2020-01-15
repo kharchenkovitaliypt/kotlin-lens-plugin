@@ -20,5 +20,6 @@ tasks.withType<KotlinCompile> {
     println("Hello from kotlin compile- $name")
     kotlinOptions {
         useIR = true
+        jvmTarget = "1.8"
     }
 }
