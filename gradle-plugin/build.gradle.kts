@@ -1,7 +1,7 @@
 plugins {
     id("java-gradle-plugin")
-    kotlin("jvm")
-    kotlin("kapt")
+    kotlin("jvm") version "1.3.70-eap-42"
+    kotlin("kapt") version "1.3.70-eap-42"
     id("maven-publish")
 }
 

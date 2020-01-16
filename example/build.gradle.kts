@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.3.70-eap-42"
     id("com.vitaliykharchenko.kotlin.lens") version "0.0.1"
 }
 
@@ -10,8 +10,8 @@ lens {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib", version = "1.3.70-eap-42"))
+    implementation(kotlin("reflect", version = "1.3.70-eap-42"))
 
     testImplementation("junit:junit:4.12")
 }
