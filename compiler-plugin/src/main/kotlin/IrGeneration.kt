@@ -35,6 +35,7 @@ fun generateIr(
 
             override fun visitClass(declaration: IrClass) {
                 declaration.acceptChildrenVoid(this)
+                createWriteSelfFunctionDescriptor(declaration.descriptor)
             }
         })
     }
